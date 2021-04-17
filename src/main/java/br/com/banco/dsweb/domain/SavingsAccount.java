@@ -1,9 +1,34 @@
 package br.com.banco.dsweb.domain;
 
+import javax.persistence.Column;
+
+import br.com.banco.dsweb.util.ConstantUtil;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+//@Entity(name = "TB_SAVINGS_ACCOUNT")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class SavingsAccount extends Account{
 
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Column(name = "RATE_PER_MONTH")
+	private Double interestRate;
 
+	
+	public static SavingsAccount builder(Account account) {
+		SavingsAccount savingsAccount = new SavingsAccount();
+		savingsAccount.setAccountNumber(account.getAccountNumber());
+		savingsAccount.setAgency(account.getAgency());
+		savingsAccount.setBalance(account.getBalance());
+		savingsAccount.setClient(account.getClient());
+		savingsAccount.setInterestRate(ConstantUtil.TAX);
+		
+		return savingsAccount;
+	}
 }

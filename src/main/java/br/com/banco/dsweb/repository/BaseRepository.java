@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID>{
-
+	
+	Boolean findByClient(Long id);
 }

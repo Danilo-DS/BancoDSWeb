@@ -33,12 +33,12 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public Client updateClient(Client client, Long id) {
+	public Client updateClient(Client clientRequest, Long id) {
 		if(isClientExisting(id)) {
-			Client clientExisting = clientRepository.findById(id).get();
-			client.setId(clientExisting.getId());
-			saveUpdateClient(client);
-			return client;
+			Client clientUpdated = fillClient(clientRepository.findById(id).get(), clientRequest);
+			saveUpdateClient(clientUpdated);
+			
+			return clientUpdated;
 		}
 		else {
 			throw new RuntimeException("Mensagem");
@@ -70,5 +70,15 @@ public class ClientServiceImpl implements ClientService{
 	
 	private void saveUpdateClient(Client client) {
 		clientRepository.save(client);
+	}
+	
+	private Client fillClient(Client clientExisting, Client clientRequest) {
+		clientExisting.setName(clientRequest.getName().isBlank() ? clientExisting.getName() : clientRequest.getName());
+		clientExisting.setNuCpfCnpj(clientRequest.getNuCpfCnpj().isBlank() ? clientExisting.getNuCpfCnpj() : clientRequest.getNuCpfCnpj());
+		clientExisting.setEmail(clientRequest.getEmail().isBlank() ? clientExisting.getEmail() : clientRequest.getEmail());
+		clientExisting.setFone(clientRequest.getFone().isBlank() ? clientExisting.getFone() : clientRequest.getFone());
+		clientExisting.setAddress(clientRequest.getAddress().isBlank() ? clientExisting.getAddress() : clientRequest.getAddress());
+		
+		return clientExisting;
 	}
 }
