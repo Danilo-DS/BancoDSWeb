@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public abstract class Account implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "COD")
 	private Long id;
 	
 	@Column(name = "NU_ACCOUNT", nullable = false)
@@ -38,6 +41,7 @@ public abstract class Account implements Serializable{
 	@Column(name = "BALANCE")
 	private Double balance;
 	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "TypeAccount", nullable = false)
 	private TypeAccount typeAccount;
 	

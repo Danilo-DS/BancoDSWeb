@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import br.com.banco.dsweb.config.ModelConvert;
 import br.com.banco.dsweb.domain.Client;
@@ -73,11 +74,11 @@ public class ClientServiceImpl implements ClientService{
 	}
 	
 	private Client fillClient(Client clientExisting, Client clientRequest) {
-		clientExisting.setName(clientRequest.getName().isBlank() ? clientExisting.getName() : clientRequest.getName());
-		clientExisting.setNuCpfCnpj(clientRequest.getNuCpfCnpj().isBlank() ? clientExisting.getNuCpfCnpj() : clientRequest.getNuCpfCnpj());
-		clientExisting.setEmail(clientRequest.getEmail().isBlank() ? clientExisting.getEmail() : clientRequest.getEmail());
-		clientExisting.setFone(clientRequest.getFone().isBlank() ? clientExisting.getFone() : clientRequest.getFone());
-		clientExisting.setAddress(clientRequest.getAddress().isBlank() ? clientExisting.getAddress() : clientRequest.getAddress());
+		clientExisting.setName(StringUtils.hasText(clientRequest.getName()) ? clientExisting.getName() : clientRequest.getName());
+		clientExisting.setNuCpfCnpj(StringUtils.hasText(clientRequest.getNuCpfCnpj()) ? clientExisting.getNuCpfCnpj() : clientRequest.getNuCpfCnpj());
+		clientExisting.setEmail(StringUtils.hasText(clientRequest.getEmail()) ? clientExisting.getEmail() : clientRequest.getEmail());
+		clientExisting.setFone(StringUtils.hasText(clientRequest.getFone()) ? clientExisting.getFone() : clientRequest.getFone());
+		clientExisting.setAddress(StringUtils.hasText(clientRequest.getAddress()) ? clientExisting.getAddress() : clientRequest.getAddress());
 		
 		return clientExisting;
 	}

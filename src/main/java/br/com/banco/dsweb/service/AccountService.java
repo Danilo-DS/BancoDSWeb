@@ -17,4 +17,9 @@ public interface AccountService {
 	Account updateAccount(Long id, AccountUpdateDTO accountUpdateDTO);
 	
 	void deleteAccount(Long id);
+	
+	Account findByAccountAgency(String numberAccount, String numberAgency);
+	
+	void updateBalance(Account account);
+	
 }

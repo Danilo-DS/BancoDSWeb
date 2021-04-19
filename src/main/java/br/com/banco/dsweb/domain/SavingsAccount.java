@@ -1,19 +1,21 @@
 package br.com.banco.dsweb.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 
+import br.com.banco.dsweb.enums.TypeAccount;
 import br.com.banco.dsweb.util.ConstantUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-//@Entity(name = "TB_SAVINGS_ACCOUNT")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class SavingsAccount extends Account{
+public class SavingsAccount extends Account implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,8 +29,11 @@ public class SavingsAccount extends Account{
 		savingsAccount.setAgency(account.getAgency());
 		savingsAccount.setBalance(account.getBalance());
 		savingsAccount.setClient(account.getClient());
+		savingsAccount.setTypeAccount(TypeAccount.SavingsAccount);
 		savingsAccount.setInterestRate(ConstantUtil.TAX);
 		
 		return savingsAccount;
 	}
+	
+	
 }

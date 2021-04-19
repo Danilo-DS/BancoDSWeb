@@ -17,7 +17,7 @@ import br.com.banco.dsweb.domain.Client;
 import br.com.banco.dsweb.service.ClientService;
 
 @RestController
-@RequestMapping(value = "/api/client")
+@RequestMapping(value = "/api/v1/client")
 public class ClientResourceImpl implements ClientResource{
 	
 	@Autowired

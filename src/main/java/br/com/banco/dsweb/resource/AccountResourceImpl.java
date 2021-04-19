@@ -14,7 +14,7 @@ import br.com.banco.dsweb.dto.AccountUpdateDTO;
 import br.com.banco.dsweb.service.AccountService;
 
 @RestController
-@RequestMapping(value = "/api/account")
+@RequestMapping(value = "/api/v1/account")
 public class AccountResourceImpl implements AccountResource{
 	
 	@Autowired
