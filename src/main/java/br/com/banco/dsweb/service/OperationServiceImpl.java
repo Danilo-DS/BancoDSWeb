@@ -43,8 +43,8 @@ public class OperationServiceImpl implements OperationService{
 		accountOrigin.setBalance(calculateTransaction(accountOrigin.getBalance(), deposit.getValueOperation(), TypeOperation.Withdraw, Rate.NO_FEE.tax));
 		accountDestine.setBalance(calculateTransaction(accountDestine.getBalance(), deposit.getValueOperation(), TypeOperation.Deposit, Rate.NO_FEE.tax));
 			
-		Extratc extractAccountOrigin = Extratc.builder(accountOrigin, accountDestine, TypeOperation.Deposit, ConstantUtil.subtract + deposit.getValueOperation().toString()); 
-		Extratc extractAccountDestine = Extratc.builder(accountDestine, accountDestine,TypeOperation.Deposit, ConstantUtil.sum + deposit.getValueOperation().toString()); 
+		Extratc extractAccountOrigin = Extratc.builder(accountOrigin, accountDestine, TypeOperation.Deposit, ConstantUtil.SUBTRACT + deposit.getValueOperation().toString()); 
+		Extratc extractAccountDestine = Extratc.builder(accountDestine, accountDestine,TypeOperation.Deposit, ConstantUtil.SUM + deposit.getValueOperation().toString()); 
 		
 		saveExtract(Arrays.asList(extractAccountOrigin, extractAccountDestine));
 		
@@ -67,7 +67,7 @@ public class OperationServiceImpl implements OperationService{
 			account.setBalance(calculateTransaction(previousBalance, deposit.getValueOperation(), TypeOperation.Deposit, Rate.RATE_NEGATIVA_BALANCE.tax));
 		}
 		
-		Extratc extractAccount = Extratc.builder(account, null, TypeOperation.Deposit, ConstantUtil.sum + deposit.getValueOperation().toString()); 
+		Extratc extractAccount = Extratc.builder(account, null, TypeOperation.Deposit, ConstantUtil.SUM + deposit.getValueOperation().toString()); 
 		
 		saveExtract(Arrays.asList(extractAccount));
 		
@@ -86,7 +86,7 @@ public class OperationServiceImpl implements OperationService{
 		
 		account.setBalance(calculateTransaction(account.getBalance(), withdraw.getValueOperation(), TypeOperation.Withdraw,Rate.NO_FEE.tax));
 		
-		Extratc extractAccount = Extratc.builder(account, null, TypeOperation.Withdraw, ConstantUtil.subtract + withdraw.getValueOperation().toString());
+		Extratc extractAccount = Extratc.builder(account, null, TypeOperation.Withdraw, ConstantUtil.SUBTRACT + withdraw.getValueOperation().toString());
 		
 		saveExtract(Arrays.asList(extractAccount));
 		
@@ -113,8 +113,8 @@ public class OperationServiceImpl implements OperationService{
 			accountDestine.setBalance(calculateTransaction(accountDestine.getBalance(), transfer.getValueOperation(), TypeOperation.Transfer, Rate.NO_FEE.tax));
 		}
 		
-		Extratc extractAccountOrigin = Extratc.builder(accountOrigin, accountDestine, TypeOperation.Transfer, ConstantUtil.subtract + transfer.getValueOperation().toString()); 
-		Extratc extractAccountDestine = Extratc.builder(accountDestine, accountDestine,TypeOperation.Transfer, ConstantUtil.sum + transfer.getValueOperation().toString()); 
+		Extratc extractAccountOrigin = Extratc.builder(accountOrigin, accountDestine, TypeOperation.Transfer, ConstantUtil.SUBTRACT + transfer.getValueOperation().toString()); 
+		Extratc extractAccountDestine = Extratc.builder(accountDestine, accountDestine,TypeOperation.Transfer, ConstantUtil.SUM + transfer.getValueOperation().toString()); 
 		
 		saveExtract(Arrays.asList(extractAccountOrigin, extractAccountDestine));
 		

@@ -39,7 +39,7 @@ public class ClientResourceImpl implements ClientResource{
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@Override
-	public void SaveClient(Client client) {
+	public void saveClient(Client client) {
 		service.saveClient(client);
 	}
 

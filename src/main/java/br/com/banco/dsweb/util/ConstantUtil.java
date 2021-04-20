@@ -2,16 +2,12 @@ package br.com.banco.dsweb.util;
 
 public class ConstantUtil {
 	
-	//Account
-	public static final Double TAX = 0.02;
-	
-	//Transfer
-	public static final Double NO_FEE = 0.0;
-	public static final Double TAX_TRANSFER = 0.01;
-	
-	
 	//Type Operation
-	public static final String sum = "+ ";
-	public static final String subtract = "- ";
+	public static final String SUM = "+ ";
+	public static final String SUBTRACT = "- ";
 	
+	
+	//Swagger Documentation
+	public static final String BASE_PACKAGE = "br.com.banco.dsweb.resource";
+	public static final String PATHS = "/api/*";
 }

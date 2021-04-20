@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 
+import br.com.banco.dsweb.enums.Rate;
 import br.com.banco.dsweb.enums.TypeAccount;
-import br.com.banco.dsweb.util.ConstantUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +30,7 @@ public class SavingsAccount extends Account implements Serializable{
 		savingsAccount.setBalance(account.getBalance());
 		savingsAccount.setClient(account.getClient());
 		savingsAccount.setTypeAccount(TypeAccount.SavingsAccount);
-		savingsAccount.setInterestRate(ConstantUtil.TAX);
+		savingsAccount.setInterestRate(Rate.RATE_MONTH.tax);
 		
 		return savingsAccount;
 	}
