@@ -13,9 +13,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "TB_CLIENT")
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Client implements Serializable{
 
 	private static final long serialVersionUID = 1L;

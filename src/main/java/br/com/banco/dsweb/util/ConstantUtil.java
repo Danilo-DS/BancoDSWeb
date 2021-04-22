@@ -24,6 +24,10 @@ public class ConstantUtil {
 	public static final String ACCOUNT_UPDATE_BAD_REQUEST = "We were unable to update your account!";
 	public static final String ACCOUNT_TYPE_NONEXISTENT = "Type Account Nonexistent!"; 
 	
+	//AGENCY
+	public static final String AGENCY_NOT_FOUND = "Sorry, Agency Not Found!";
+	public static final String AGENCY_DELETE_BAD_REQUEST = "There are accounts registered in this agency, impossible to delete!";
+	
 	//OPERATION
 	public static final String OPERATION_TRANSFER = "Transaction value greater than the account balance";
 	public static final String OPERATION_NEGATIVE_LIMIT = "Negative withdrawal limit exceeded";
@@ -38,5 +42,8 @@ public class ConstantUtil {
 	public static final String CONTACT_NAME = "Danilo Silva";
 	public static final String CONTACT_URL = "https://github.com/Danilo-DS";
 	public static final String CONTACT_EMAIL = "danilosyllva.16@gmail.com";
+
+	/*ERROR INTERN*/
+	public static final String ERROR = "UNEXPECTED ERROR";
 	
 }

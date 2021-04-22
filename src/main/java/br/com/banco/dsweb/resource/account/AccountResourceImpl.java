@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.banco.dsweb.dto.account.AccountCreateDTO;
+import br.com.banco.dsweb.dto.account.AccountUpdateDTO;
 import br.com.banco.dsweb.service.account.AccountService;
 import io.swagger.annotations.Api;
 
@@ -43,13 +45,13 @@ public class AccountResourceImpl implements AccountResource{
 		accountService.saveAccount(account);
 	}
 
-	/*
-	 * @PutMapping(value = "/{id}")
-	 * 
-	 * @Override public ResponseEntity<?> updateAccount(@PathVariable Long
-	 * id, @RequestBody AccountUpdateDTO accountUpdateDTO) { return
-	 * ResponseEntity.ok(accountService.updateAccount(id, accountUpdateDTO)); }
-	 */
+	
+	@PutMapping(value = "/{id}")
+	@Override
+	public ResponseEntity<?> updateAccount(@PathVariable Long id, @RequestBody AccountUpdateDTO accountUpdateDTO) {
+		return ResponseEntity.ok(accountService.updateAccount(id, accountUpdateDTO));
+	}
+	 
 
 	@DeleteMapping(value = "/{id}")
 	@Override

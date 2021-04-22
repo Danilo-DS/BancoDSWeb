@@ -1,14 +1,13 @@
-package br.com.banco.dsweb.dto.account;
+package br.com.banco.dsweb.dto.agency;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class AccountUpdateDTO {
+public class AgencyDTO {
 
 	private String numberAgency;
-	
 }

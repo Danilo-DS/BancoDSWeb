@@ -16,6 +16,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import br.com.banco.dsweb.domain.agency.Agency;
 import br.com.banco.dsweb.domain.client.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,8 +40,9 @@ public abstract class Account implements Serializable{
 	@Column(name = "NU_ACCOUNT", nullable = false)
 	private String accountNumber;
 	
-	@Column(name = "NU_AGENCY", nullable = false)
-	private String agency;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "AGENCY_COD", foreignKey = @ForeignKey(name = "AGENCY_COD"))
+	private Agency agency;
 	
 	@Column(name = "BALANCE", insertable = false, updatable = false, columnDefinition = "DECIMAL(10,2) default 0")
 	private Double balance;
@@ -49,7 +51,7 @@ public abstract class Account implements Serializable{
 	private String typeAccount;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(foreignKey = @ForeignKey(name = "CLIENT_COD"))
+	@JoinColumn(name = "CLIENT_COD", foreignKey = @ForeignKey(name = "CLIENT_COD"))
 	private Client client;
 	
 }

@@ -3,6 +3,7 @@ package br.com.banco.dsweb.service.account;
 import java.util.List;
 
 import br.com.banco.dsweb.domain.account.Account;
+import br.com.banco.dsweb.domain.agency.Agency;
 import br.com.banco.dsweb.dto.account.AccountCreateDTO;
 import br.com.banco.dsweb.dto.account.AccountDTO;
 import br.com.banco.dsweb.dto.account.AccountUpdateDTO;
@@ -19,7 +20,7 @@ public interface AccountService {
 	
 	void deleteAccount(Long id);
 	
-	Account findByAccountAgency(String numberAccount, String numberAgency);
+	Account findByAccountAgency(String numberAccount, Agency agency);
 	
 	void updateBalance(Double newBalance, Long accountId);
 	

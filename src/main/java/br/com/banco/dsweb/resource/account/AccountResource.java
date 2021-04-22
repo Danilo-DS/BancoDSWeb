@@ -3,6 +3,7 @@ package br.com.banco.dsweb.resource.account;
 import org.springframework.http.ResponseEntity;
 
 import br.com.banco.dsweb.dto.account.AccountCreateDTO;
+import br.com.banco.dsweb.dto.account.AccountUpdateDTO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -31,18 +32,15 @@ public interface AccountResource {
 	})
 	void saveAccount(AccountCreateDTO accountCreateDTO);
 	
-	/*
-	 * @ApiOperation(value = "Update Account")
-	 * 
-	 * @ApiResponses(value = {
-	 * 
-	 * @ApiResponse(code = 200, message = "Update Account Success"),
-	 * 
-	 * @ApiResponse(code = 400, message = "Sorry, Bad Request Error"),
-	 * 
-	 * @ApiResponse(code = 500, message = "Unexpected Error") }) ResponseEntity<?>
-	 * updateAccount( Long id, AccountUpdateDTO accountUpdateDTO);
-	 */
+	
+	  @ApiOperation(value = "Update Account")
+	  @ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Update Account Success"),
+			@ApiResponse(code = 400, message = "Sorry, Bad Request Error"),
+			@ApiResponse(code = 500, message = "Unexpected Error") 
+	  })
+	  ResponseEntity<?> updateAccount(Long id, AccountUpdateDTO accountUpdateDTO);
+	 
 	
 	@ApiOperation(value = "Delete Account")
 	@ApiResponses(value = {

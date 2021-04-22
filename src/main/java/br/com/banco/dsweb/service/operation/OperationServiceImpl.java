@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.banco.dsweb.config.ModelConvert;
 import br.com.banco.dsweb.domain.account.Account;
+import br.com.banco.dsweb.domain.agency.Agency;
 import br.com.banco.dsweb.domain.extratc.Extratc;
 import br.com.banco.dsweb.dto.operation.TransactionResponseDTO;
 import br.com.banco.dsweb.dto.operation.TransferDTO;
@@ -18,6 +19,7 @@ import br.com.banco.dsweb.enums.Rate;
 import br.com.banco.dsweb.enums.TypeOperation;
 import br.com.banco.dsweb.exception.operation.OperationException;
 import br.com.banco.dsweb.service.account.AccountService;
+import br.com.banco.dsweb.service.agency.AgencyService;
 import br.com.banco.dsweb.service.extratc.ExtratcService;
 import br.com.banco.dsweb.util.ConstantUtil;
 
@@ -30,12 +32,16 @@ public class OperationServiceImpl implements OperationService{
 	@Autowired
 	private ExtratcService extratcService;
 	
+	@Autowired
+	private AgencyService agencyService;
+	
 	private Double previousBalance;
 		
 	@Override
 	public TransactionResponseDTO depositAccount(WithdrawDepositDTO deposit) {
 		
-		Account account = accountService.findByAccountAgency(deposit.getAccountOrigin(), deposit.getAgencyOrigin());
+		Agency agencyOrigin = agencyService.findAgency(deposit.getAgencyOrigin());
+		Account account = accountService.findByAccountAgency(deposit.getAccountOrigin(), agencyOrigin);
 		
 		Double newBalance;
 		previousBalance = account.getBalance();
@@ -64,7 +70,8 @@ public class OperationServiceImpl implements OperationService{
 	@Override
 	public TransactionResponseDTO withdrawAccount(WithdrawDepositDTO withdraw) {
 		
-		Account account = accountService.findByAccountAgency(withdraw.getAccountOrigin(), withdraw.getAgencyOrigin());
+		Agency agencyOrigin = agencyService.findAgency(withdraw.getAgencyOrigin());
+		Account account = accountService.findByAccountAgency(withdraw.getAccountOrigin(), agencyOrigin);
 		
 		Double newBalance;
 		previousBalance = account.getBalance();
@@ -84,8 +91,11 @@ public class OperationServiceImpl implements OperationService{
 	@Override
 	public TransactionResponseDTO trasferAccount(TransferDTO transfer) {
 		
-		Account accountOrigin = accountService.findByAccountAgency(transfer.getAccountOrigin(), transfer.getAgencyOrigin());
-		Account accountDestine = accountService.findByAccountAgency(transfer.getAccountDestine(), transfer.getAgencyDestine());
+		Agency agencyOrigin = agencyService.findAgency(transfer.getAgencyOrigin());
+		Agency agencyDestine = agencyService.findAgency(transfer.getAgencyDestine());
+		
+		Account accountOrigin = accountService.findByAccountAgency(transfer.getAccountOrigin(), agencyOrigin);
+		Account accountDestine = accountService.findByAccountAgency(transfer.getAccountDestine(), agencyDestine);
 		
 		previousBalance = accountOrigin.getBalance();
 		Double newBalanceOrigin;

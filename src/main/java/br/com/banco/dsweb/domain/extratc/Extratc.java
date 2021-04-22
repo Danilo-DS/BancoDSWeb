@@ -67,12 +67,12 @@ public class Extratc implements Serializable{
 	private Double balance;
 	
 	public static Extratc builder(Account accountOrigin, Account accountDestine, TypeOperation operation, Double previousBalance, String valueTransaction) {
-		return new Extratc(null , LocalDate.now(), accountOrigin, accountOrigin.getAgency(), accountOrigin.getAccountNumber(),
-				accountDestine.getAgency(), accountDestine.getAccountNumber(), operation, valueTransaction, previousBalance, accountOrigin.getBalance());
+		return new Extratc(null , LocalDate.now(), accountOrigin, accountOrigin.getAgency().getNumberAgency(), accountOrigin.getAccountNumber(),
+				accountDestine.getAgency().getNumberAgency(), accountDestine.getAccountNumber(), operation, valueTransaction, previousBalance, accountOrigin.getBalance());
 	}
 	
 	public static Extratc builder(Account accountOrigin, TypeOperation operation,Double previousBalance, String valueTransaction) {
-		return new Extratc(null , LocalDate.now(), accountOrigin, accountOrigin.getAgency(), accountOrigin.getAccountNumber(),
+		return new Extratc(null , LocalDate.now(), accountOrigin, accountOrigin.getAgency().getNumberAgency(), accountOrigin.getAccountNumber(),
 				null, null, operation, valueTransaction, previousBalance, accountOrigin.getBalance());
 	}
 }

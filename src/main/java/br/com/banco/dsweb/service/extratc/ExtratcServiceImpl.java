@@ -13,6 +13,7 @@ import br.com.banco.dsweb.dto.extratc.ConsultaExtratcDTO;
 import br.com.banco.dsweb.dto.extratc.ExtratcDTO;
 import br.com.banco.dsweb.repository.ExtratcRepository;
 import br.com.banco.dsweb.service.account.AccountService;
+import br.com.banco.dsweb.service.agency.AgencyService;
 
 @Service
 public class ExtratcServiceImpl implements ExtratcService {
@@ -23,11 +24,13 @@ public class ExtratcServiceImpl implements ExtratcService {
 	@Autowired
 	private AccountService accountService;
 	
+	@Autowired 
+	private AgencyService agencyService;
+	
 	@Transactional(readOnly = true)
 	@Override
 	public List<ExtratcDTO> listExtractAccount(ConsultaExtratcDTO consultaExtractDTO) {
-		accountService.findByAccountAgency(consultaExtractDTO.getNumberAccount(), consultaExtractDTO.getNumberAgency());
-		return toListDTO(extratcRespository.findByAccount(accountService.findByAccountAgency(consultaExtractDTO.getNumberAccount(), consultaExtractDTO.getNumberAgency())));
+		return toListDTO(extratcRespository.findByAccount(accountService.findByAccountAgency(consultaExtractDTO.getNumberAccount(), agencyService.findAgency(consultaExtractDTO.getNumberAgency()))));
 	}
 	
 	@Transactional
