@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum TypeAccount {
-	CurrentAccount ("CA"),
-	SavingsAccount ("SA");
+	CURRENT_ACCOUNT ("CA"),
+	SAVINGS_ACCOUNT ("SA");
 	
 	public String type;
+
 }

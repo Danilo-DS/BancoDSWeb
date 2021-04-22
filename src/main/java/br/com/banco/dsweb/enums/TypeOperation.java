@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum TypeOperation {
-	
-	Withdraw,
-	Deposit,
-	Transfer;
+	WITHDRAW,
+	DEPOSIT,
+	TRANSFER;
 }
