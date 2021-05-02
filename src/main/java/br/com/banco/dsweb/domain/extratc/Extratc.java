@@ -3,6 +3,7 @@ package br.com.banco.dsweb.domain.extratc;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -37,7 +38,7 @@ public class Extratc implements Serializable{
 	@Column(name = "DATE_TRANSACTION", nullable = false, columnDefinition = "TIMESTAMP")
 	private LocalDate dateTransaction;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "ACCOUNT_ID_ORIGIN", foreignKey = @ForeignKey(name = "ACCOUNT_ID_ORIGIN"))
 	private Account account;
 	

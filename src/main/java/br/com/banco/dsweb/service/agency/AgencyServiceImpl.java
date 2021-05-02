@@ -49,7 +49,7 @@ public class AgencyServiceImpl implements AgencyService {
 	@Override
 	public AgencyDetailsDTO updateAgency(String numberAgency, AgencyRequestDTO agencyRequest) {
 		
-		Agency agency = findAgency(agencyRequest.getNameAgency());
+		Agency agency = findAgency(numberAgency);
 		agency.setNameAgency(StringUtils.hasText(agencyRequest.getNameAgency()) ? agencyRequest.getNameAgency() : agency.getNameAgency() );
 		agency.setLocality(StringUtils.hasText(agencyRequest.getLocality()) ? agencyRequest.getLocality() : agency.getLocality());
 		

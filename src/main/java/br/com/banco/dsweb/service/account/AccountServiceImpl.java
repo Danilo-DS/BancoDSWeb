@@ -22,6 +22,7 @@ import br.com.banco.dsweb.exception.account.AccountException;
 import br.com.banco.dsweb.repository.AccountRepository;
 import br.com.banco.dsweb.service.agency.AgencyService;
 import br.com.banco.dsweb.service.client.ClientService;
+import br.com.banco.dsweb.service.extratc.ExtratcService;
 import br.com.banco.dsweb.util.ConstantUtil;
 
 @Service
@@ -35,6 +36,9 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
 	private AgencyService agencyService;
+	
+	@Autowired
+	private ExtratcService extratcService;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -94,19 +98,18 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	@Transactional
 	public void deleteAccount(Long id) {
-		if(verifyExistAccount(id)) {
-			
-//			Account accountExisting = accountRepository.getOne(id);
-			
-//			if(Optional.ofNullable(clientService.findClientById(accountExisting.getClient().getId())).isPresent()) {
-//				throw new RuntimeException("Mensagem");
-//			}
-			
-			accountRepository.deleteById(id);
-		}
-		else {
+		if(!verifyExistAccount(id)) {
 			throw new AccountException(ConstantUtil.ACCOUNT_DELETE_BAD_REQUEST, HttpStatus.BAD_REQUEST);
 		}
+		
+		Account accountExisting = accountRepository.getOne(id);
+		if(extratcService.existExtratc(accountExisting)) {
+			extratcService.deleteExtratc(accountExisting);
+		}
+		else {
+			accountRepository.deleteById(id);
+		}
+		
 	}
 	
 	@Override
@@ -132,12 +135,8 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Transactional(readOnly = true)
 	private boolean verifyExistAccount(Long id) {
-		if(accountRepository.existsById(id)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return accountRepository.existsById(id);
+
 	}
 		
 }

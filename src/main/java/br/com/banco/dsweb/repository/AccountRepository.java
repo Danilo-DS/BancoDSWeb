@@ -19,8 +19,5 @@ public interface AccountRepository extends BaseRepository<Account, Long>{
 	@Query("UPDATE TB_ACCOUNT A SET A.balance = :newBalance WHERE A.id = :accountId")
 	void updateBalanceAccount(@Param("newBalance") Double newBalance, @Param("accountId") Long accountId);
 	
-	@Query("SELECT A FROM TB_ACCOUNT A WHERE A.agency = :agency")
-	Boolean existAccoutWithAgency(@Param("agency") Agency agency);
-	
 	Boolean existsByAgency(Agency agency);
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ public class AgencyResourceImpl implements AgencyResource {
 		return ResponseEntity.ok(agencyService.findAgency(numberAgency));
 	}
 	
+	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@ResponseBody
 	@Override
@@ -45,16 +47,17 @@ public class AgencyResourceImpl implements AgencyResource {
 		return agencyService.saveAgency(agencyRequestDTO);
 	}
 	
-	@PutMapping(value = "{/numberAgency}")
+	@PutMapping(value = "/{numberAgency}")
 	@Override
 	public ResponseEntity<?> updatedAgency(@PathVariable String numberAgency, @RequestBody AgencyRequestDTO agencyRequestDTO) {
 		return ResponseEntity.ok(agencyService.updateAgency(numberAgency, agencyRequestDTO));
 	}
 
-	@DeleteMapping(value = "{/id}")
+	@DeleteMapping(value = "/{id}")
 	@Override
-	public void deleteAgency(@PathVariable Long id) {
+	public ResponseEntity<?> deleteAgency(@PathVariable Long id) {
 		agencyService.deleteAgency(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

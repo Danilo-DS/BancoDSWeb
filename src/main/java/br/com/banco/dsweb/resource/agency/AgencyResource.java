@@ -47,5 +47,5 @@ public interface AgencyResource {
 			@ApiResponse(code = 400, message = "Agency Not Found, Impossible Delete"),
 			@ApiResponse(code = 500, message = "Unexpected Error")
 	})
-	void deleteAgency(Long id);
+	ResponseEntity<?> deleteAgency(Long id);
 }

@@ -10,5 +10,10 @@ import br.com.banco.dsweb.domain.extratc.Extratc;
 @Repository
 public interface ExtratcRepository extends BaseRepository<Extratc, Long>{
 	
-	List<Extratc> findByAccount( Account accountId);
+	List<Extratc> findByAccount(Account account);
+	
+	Boolean existsByAccount(Account account);
+	
+	void deleteByAccount(Account account);
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.banco.dsweb.config.ModelConvert;
+import br.com.banco.dsweb.domain.account.Account;
 import br.com.banco.dsweb.domain.extratc.Extratc;
 import br.com.banco.dsweb.dto.extratc.ConsultaExtratcDTO;
 import br.com.banco.dsweb.dto.extratc.ExtratcDTO;
@@ -33,14 +34,26 @@ public class ExtratcServiceImpl implements ExtratcService {
 		return toListDTO(extratcRespository.findByAccount(accountService.findByAccountAgency(consultaExtractDTO.getNumberAccount(), agencyService.findAgency(consultaExtractDTO.getNumberAgency()))));
 	}
 	
+	@Transactional(readOnly = true)
+	@Override
+	public boolean existExtratc(Account account) {
+		
+		return extratcRespository.existsByAccount(account);
+	}
+	
 	@Transactional
 	@Override
 	public void saveExtratc(Extratc extract) {
 		extratcRespository.save(extract);	
 	}
 	
+	@Override
+	public void deleteExtratc(Account account) {
+		extratcRespository.deleteByAccount(account);
+	}	
+	
 	private List<ExtratcDTO> toListDTO(List<Extratc> extratcs) {
 		return extratcs.stream().map(e -> ModelConvert.convertDto().map(e, ExtratcDTO.class)).collect(Collectors.toList());
 	}
-	
+
 }
